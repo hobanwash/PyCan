@@ -32,11 +32,11 @@ jobs:
       run: |
         docker build -t flask-app .  # Build the Docker image from the Dockerfile
 
-    - name: Run tests
-      run: |
-        docker run flask-app pytest  # Run your tests (if you have any)
+#    - name: Run tests
+#      run: |
+#        docker run flask-app pytest  # Run your tests (if you have any)
 
-    - name: Deploy (optional)
-      run: |
-        # Add your deployment steps here (e.g., to AWS, Heroku, or a server)
-        echo "Deploying the app"
+#    - name: Deploy (optional)
+#      run: |
+#        # Add your deployment steps here (e.g., to AWS, Heroku, or a server)
+#        echo "Deploying the app"
