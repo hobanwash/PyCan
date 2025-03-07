@@ -1,0 +1,42 @@
+name: CI/CD Pipeline
+
+# This workflow will run on pushes and pull requests to the test2 branch
+on:
+  push:
+    branches:
+      - test2
+  pull_request:
+    branches:
+      - test2
+
+jobs:
+  # Define a job named "build"
+  build:
+    runs-on: ubuntu-latest  # The operating system to run the workflow on
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # This action checks out your repository
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'  # Define the Python version to use
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # Install dependencies from requirements.txt
+
+    - name: Build Docker image
+      run: |
+        docker build -t flask-app .  # Build the Docker image from the Dockerfile
+
+    - name: Run tests
+      run: |
+        docker run flask-app pytest  # Run your tests (if you have any)
+
+    - name: Deploy (optional)
+      run: |
+        # Add your deployment steps here (e.g., to AWS, Heroku, or a server)
+        echo "Deploying the app"
